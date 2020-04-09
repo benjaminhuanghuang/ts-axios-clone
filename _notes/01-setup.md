@@ -12,4 +12,6 @@
 ## Transplile
 ```
   tsc myapp.ts
+
+  tsc index.ts --strictNullChecks        # type null is not assignable ot type number   
 ```

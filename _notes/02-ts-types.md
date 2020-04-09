@@ -21,8 +21,6 @@
 - tuple
 ````
   let x: [string, number] = ['hello', 10]
-  x[3] = 1      // the type of extra element is string|number
-  x[4] = true   // error! 
 ````
 - enum
 ````
@@ -38,15 +36,28 @@
 ````
 - any
 
-- void
-
-- null 
-
-- undefined
-
+- void, null, undefined
+```
+  let u:void = undefined 
+  let u:void = null 
+```
+enblen the check
+```
+  tsc index.ts --strictNullChecks
+```
 - never
+```
 
+```
 - object
-
+```
+```
 
 ## 类型推断
+``` 
+  let someVal: any = 'this is a string'
+
+  let strLength: number = (<string>someVal).length
+
+  let strLength: number = (someVal as string).length
+```

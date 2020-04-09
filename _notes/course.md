@@ -11,17 +11,18 @@
 
 
 ## Content
-第1章 课程介绍【悄悄告诉你，一定要看，有福利】
-介绍本课程的主要内容，通过本次课程可以学到的知识点，学习方法介绍。
+- 第1章 课程介绍【悄悄告诉你，一定要看，有福利】
 
-第2章 初识 Typescript【初次体验】
-教会同学们安装 Typescript 编译器，以及通过编写第一个 TypeScript 程序认识 TypeScript。
+- 第2章 初识 Typescript【初次体验】
 
-第3章 Typescript 类型系统【必备基础，牢固掌握】
-主讲 TypeScript 的一些重要的基础概念，并配合一些具体的代码示例辅助说明，帮助同学们了解 TypeScript 的常见用法，为之后的实战打下基础
+  Typescript 编译器，以及通过编写第一个 TypeScript 程序认识 TypeScript。
 
-第4章 ts-axios 项目构建【工欲善其事必先利其器】
-分析 axios 项目的重构需求，使用 typescrpit-library-starter 脚手架初始化项目，并编写基础请求的代码，搭建整个 demo 的架构方案。
+- 第3章 Typescript 类型系统【必备基础，牢固掌握】 
+  
+  主讲 TypeScript 的一些重要的基础概念，并配合一些具体的代码示例辅助说明，帮助同学们了解 TypeScript 的常见用法，为之后的实战打下基础
+
+- 第4章 ts-axios 项目构建【工欲善其事必先利其器】
+  分析 axios 项目的重构需求，使用 typescrpit-library-starter 脚手架初始化项目，并编写基础请求的代码，搭建整个 demo 的架构方案。
 
 第5章 ts-axios 基础功能实现【核心流程】
 实现 axios 的基础功能，包括对请求 url、data、header 以及响应 data、header 的处理。

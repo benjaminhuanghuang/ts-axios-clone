@@ -7,3 +7,9 @@
 ```
   sudo npm i -g typescirpt
 ```
+
+
+## Transplile
+```
+  tsc myapp.ts
+```

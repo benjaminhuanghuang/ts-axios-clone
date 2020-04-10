@@ -4,6 +4,11 @@ Use TypeScript library starter(https://github.com/alexjoverm/typescript-library-
 
 ![alt text](tools.png)
 
+
+## Scripts
+- npm run commit
+
+
 ## Project Structure
 ![alt text](ts-axios-project.png)
 

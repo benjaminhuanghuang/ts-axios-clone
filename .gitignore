@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules
 coverage
 .nyc_output
@@ -11,3 +12,7 @@ compiled
 .rpt2_cache
 docs
 package-lock.json
+=======
+.DS_Store
+node_modules/
+>>>>>>> dffc9830b30ecaef5f597a5836d4c7d5c81b1902

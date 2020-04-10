@@ -14,4 +14,6 @@
   tsc myapp.ts
 
   tsc index.ts --strictNullChecks        # type null is not assignable ot type number   
+
+  tsc index.ts --target es5              # for setter and getter  
 ```

@@ -28,7 +28,7 @@ export function processHeaders(headers: any, data: any): any {
 
   return headers;
 }
-
+// conver the headers from string to an json object
 export function parseHeaders(headers: string): any {
   let parsed = Object.create(null);
   if (!headers) {

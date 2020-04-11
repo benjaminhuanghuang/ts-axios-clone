@@ -1,5 +1,5 @@
 import axios from '../../src/index'
-//--------------------------Use url parameter---------------------------------
+// --------------------------Use url parameter---------------------------------
 /**
  * 参数为数组
  * => /base/get?foo[]=bar&foo[]=baz
@@ -86,7 +86,7 @@ axios({
     bar: 'baz'
   }
 })
-//--------------------------Use data---------------------------------
+// --------------------------Use data---------------------------------
 /**
  * 发送json对象的post请求
  */
@@ -139,7 +139,7 @@ axios({
 axios({
   method: 'post',
   url: '/base/post',
-  // responseType: "json",
+  // responseType: "json",    //data is string without this line
   data: {
     a: 3,
     b: 4

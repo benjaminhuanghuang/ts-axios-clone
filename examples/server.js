@@ -33,14 +33,14 @@ router.get('/simple/get', (req, res) => {
 })
 
 router.get('/base/get', (req, res) => {
-  res.json(reg.query)
+  res.json(req.query)
 })
 
-router.get('/base/post', (req, res) => {
-  res.json(reg.body)
+router.post('/base/post', (req, res) => {
+  res.json(req.body)
 })
 
-router.get('/base/buffer', (req, res) => {
+router.post('/base/buffer', (req, res) => {
   let msg=[]
   req.on('data', (chunk)=>{
     if (chunk){

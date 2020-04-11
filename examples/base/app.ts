@@ -118,8 +118,8 @@ axios({
     'content-type': 'application/json',
     Accept: 'application/json, text/plain, */*'
   },
-  data: {
-    a: 1,
+  data: { 
+    a: 1, 
     b: 2
   }
 })

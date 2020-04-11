@@ -1,29 +1,35 @@
-
-import {
-  AxiosRequestConfig,
-} from './types';
+import { AxiosRequestConfig, AxiosPromise} from './types'
 
 import xhr from './xhr'
-import { buildURL } from './helpers/url';
-import { transformRequest } from './helpers/data';
+import { buildURL } from './helpers/url'
+import { transformRequest } from './helpers/data'
+import { processHeaders } from './helpers/headers'
 
-function axios(config: AxiosRequestConfig){
+function axios(config: AxiosRequestConfig):AxiosPromise {
   processConfig(config)
-  xhr(config)
+  return xhr(config)
 }
 
-function processConfig(config: AxiosRequestConfig): void{
+function processConfig(config: AxiosRequestConfig): void {
   config.url = transformURL(config)
+  // should process headers before data. Because transformRequestData changes data
+  config.headers = transformRequestData(config)   
   config.data = transformRequestData(config)
 }
 
-function transformURL(config: AxiosRequestConfig):string{
-  const {url,  params} = config
+function transformURL(config: AxiosRequestConfig): string {
+  const { url, params } = config
   return buildURL(url, params)
 }
 
-
-function transformRequestData(config: AxiosRequestConfig):any{
+function transformRequestData(config: AxiosRequestConfig): any {
   return transformRequest(config)
 }
-export default axios 
+
+function transformHeaders(config: AxiosRequestConfig): any {
+  const { headers = {}, data } = config
+
+  return processHeaders(headers, data)
+}
+
+export default axios

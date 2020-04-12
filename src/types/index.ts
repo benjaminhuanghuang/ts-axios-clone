@@ -24,16 +24,17 @@ export interface AxiosRequestConfig {
   timeout?: number
 }
 
-
+// AxiosResponse 支持范型 data
 export interface AxiosResponse<T = any> {
   data: T;
   status: number;
   statusText: string;
-  headers: any;
+  headers: any; 
   config: AxiosRequestConfig;
   request: any;
 } 
 
+// AxiosPromise 支持范型
 export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
 
 export interface AxiosError extends Error {
@@ -47,7 +48,7 @@ export interface AxiosError extends Error {
 // HTTP methods
 export interface Axios {
   defaults: AxiosRequestConfig;
-
+  // requst 时指定data类型T
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>;
 
   get<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>;
@@ -66,8 +67,9 @@ export interface Axios {
 
   getUri(config?: AxiosRequestConfig): string;
 }
-// 混合类型，有Methods and properties
+// 混合类型，有Methods and properties, 函数重载和范型
 export interface AxiosInstance extends Axios {
+  // <T = any> 函数的范型参数
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>;
 
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>;

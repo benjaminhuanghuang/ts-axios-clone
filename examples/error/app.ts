@@ -1,5 +1,5 @@
-import axios from '../../src/index'
-import { AxiosError } from '../../src/types'
+import axios, { AxiosError } from '../../src/index'
+
 /**
  * 访问不存在的URL地址，返回404
  */

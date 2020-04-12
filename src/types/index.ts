@@ -22,6 +22,10 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType; // 响应数据类型
   timeout?: number
+  transformRequest?: AxiosTransformer | AxiosTransformer[];
+  transformResponse?: AxiosTransformer | AxiosTransformer[];
+ 
+  [propName: string]: any  // for merge 
 }
 
 // AxiosResponse 支持范型 data
@@ -53,7 +57,7 @@ export interface Axios {
     response: AxiosInterceptorManager<AxiosResponse>;
   };
 
-  
+
   // requst 时指定data类型T
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>;
 
@@ -98,4 +102,8 @@ export interface ResolveFn<T> {
 
 export interface RejectedFn {
   (error: any): any;
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any;
 }

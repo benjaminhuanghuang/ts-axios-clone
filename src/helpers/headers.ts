@@ -46,7 +46,7 @@ export function parseHeaders(headers: string): any {
 
   return parsed;
 }
-
+// Used in dispatchRequest
 export function flattenHeaders(headers: any, method: Method): any {
   if (!headers) {
     return headers;

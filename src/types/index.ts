@@ -48,6 +48,12 @@ export interface AxiosError extends Error {
 // HTTP methods
 export interface Axios {
   defaults: AxiosRequestConfig;
+  interceptors: {
+    request: AxiosInterceptorManager<AxiosRequestConfig>;
+    response: AxiosInterceptorManager<AxiosResponse>;
+  };
+
+  
   // requst 时指定data类型T
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>;
 

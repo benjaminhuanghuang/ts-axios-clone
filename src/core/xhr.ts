@@ -19,7 +19,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfCookieName,
       xsrfHeaderName,
       onDownloadProgress,
-      onUploadProgress
+      onUploadProgress,
+      auth,
     } = config
 
     const request = new XMLHttpRequest();
@@ -34,7 +35,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     request.send(data)
 
     /*-------------------------------------------------------
-      internal functions
+      internal functions steps by steps
     -------------------------------------------------------*/
     function configureRequest():   void{
       request.onreadystatechange = function handleLoad() {

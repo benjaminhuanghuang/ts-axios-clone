@@ -1,9 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParse = require('cookie-parser');
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config')
+
+// Start sever2 to demo CORS
+require('./server2')
 
 const app = express()
 const compiler = webpack(webpackConfig)
@@ -23,6 +27,7 @@ app.use(express.static(__dirname))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParse())
 
 const router = express.Router()
 
@@ -33,7 +38,7 @@ registerExtendRouter();
 registerInterceptorRouter();
 registerConfigRouter();
 registerCancelRouter();
-// registerMoreRouter();
+registerMoreRouter();
 
 app.use(router)
 

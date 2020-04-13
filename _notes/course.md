@@ -6,7 +6,7 @@
 
 ## Course Information
 - https://coding.imooc.com/class/330.html
-- https://github.com/YanXinChen1990/imooc-ts-axios
+-  
 - https://github.com/leer0911/myXHR/blob/master/doc/README.md
 
 

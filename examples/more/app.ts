@@ -177,7 +177,7 @@ axios.post('http://localhost:8088/more/server2', {}, {
 // instance.get('http://img.mukewang.com/5cc01a7b0001a33718720632.jpg');
 
 /**
- * 扩展静态方法
+ * 扩展静态方法, promise all
  */
 function getA() {
   return axios.get('/more/A');

@@ -91,9 +91,20 @@ export interface AxiosInstance extends Axios {
 
 export interface AxiosStatic extends AxiosInstance {
   create(config?: AxiosRequestConfig): AxiosInstance;
+
   CancelToken: CancelTokenStatic;
   Cancel: CancelStatic;
   isCancel: (value: any) => boolean;
+  // generic method all<T>
+  // Parameter is Array, type is T or Promise<T>
+  // return Promise<Array>
+  all<T>(promises: Array<T | Promise<T>>): Promise<T[]>;
+  // generic method spread<T, R>
+  // Parameter callback is a function, parameter of this function is T[], return a R type
+  // return a function, parameter of this function is T[], return a R type
+  spread<T, R>(callback: (...args: T[]) => R): (arr: T[]) => R;
+
+  Axios: AxiosClassStatic;
 }
 
 export interface AxiosClassStatic {

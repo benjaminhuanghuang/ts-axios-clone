@@ -1,10 +1,23 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import { parseHeaders } from '../helpers/headers'
 import { createError } from '../helpers/error'
+import {isURLSameOrigin} from '../helpers/url'
+import cookie from '../helpers/cookie'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
-    const { data = null, url, method = 'get', headers, responseType, timeout, cancelToken, withCredentials } = config
+    const {
+      data = null,
+      url,
+      method = 'get',
+      headers,
+      responseType,
+      timeout,
+      cancelToken,
+      withCredentials,
+      xsrfCookieName,
+      xsrfHeaderName
+    } = config
 
     const request = new XMLHttpRequest()
 
@@ -16,9 +29,9 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     if (withCredentials) {
-      request.withCredentials = withCredentials;
+      request.withCredentials = withCredentials
     }
-    
+
     request.open(method.toUpperCase(), url!, true)
 
     request.onreadystatechange = function handleLoad() {
@@ -50,6 +63,15 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       reject(createError(`Timeout of ${timeout} ms exceed`, config, 'ECONNABORTED', request))
     }
 
+     // 防御XSRF攻击
+     if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
+      const xsrfValue = cookie.read(xsrfCookieName);
+
+      if (xsrfValue && xsrfHeaderName) {
+        headers[xsrfHeaderName] = xsrfValue;
+      }
+    }
+
     Object.keys(headers).forEach(name => {
       if (data === null && name.toLowerCase() === 'content-type') {
         delete headers[name]
@@ -61,13 +83,13 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     function processCancel(): void {
       if (cancelToken) {
         cancelToken.promise.then(reason => {
-          request.abort();
-          reject(reason);
-        });
+          request.abort()
+          reject(reason)
+        })
       }
     }
-    
-    processCancel();
+
+    processCancel()
     request.send(data)
 
     // 请求返回值不是200

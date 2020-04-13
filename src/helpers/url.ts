@@ -62,3 +62,29 @@ export function buildURL(url: string, params?: any, paramsSerializer?: (params: 
 
   return url
 }
+
+// check host and http protocal
+export function isURLSameOrigin(requestURL: string): boolean {
+  // get protocol, host of requestURL
+  const parsedOrigin = resolveURL(requestURL);
+
+  return (
+    parsedOrigin.protocol === currentOrigin.protocol && parsedOrigin.host === currentOrigin.host
+  );
+}
+
+const urlParsingNode = document.createElement('a');
+const currentOrigin = resolveURL(window.location.href);
+
+interface URLOrigin {
+  protocol: string;
+  host: string;
+}
+
+// Use a DOM <a> to get protocol and host of a url
+function resolveURL(url: string): URLOrigin {
+  urlParsingNode.setAttribute('href', url);
+  const { protocol, host } = urlParsingNode;
+
+  return { protocol, host };
+}

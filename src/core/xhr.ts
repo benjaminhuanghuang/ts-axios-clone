@@ -1,10 +1,10 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import { parseHeaders } from '../helpers/headers'
-import { createError } from '../helpers/error';
+import { createError } from '../helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
-    const { data = null, url, method = 'get', headers, responseType, timeout } = config
+    const { data = null, url, method = 'get', headers, responseType, timeout, cancelToken } = config
 
     const request = new XMLHttpRequest()
 
@@ -38,11 +38,11 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     request.onerror = function handleError() {
-      reject(createError('Network Error', config, null, request));
+      reject(createError('Network Error', config, null, request))
     }
 
     request.ontimeout = function handleTiemout() {
-      reject(createError(`Timeout of ${timeout} ms exceed`, config, 'ECONNABORTED', request));
+      reject(createError(`Timeout of ${timeout} ms exceed`, config, 'ECONNABORTED', request))
     }
 
     Object.keys(headers).forEach(name => {
@@ -52,6 +52,17 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         request.setRequestHeader(name, headers[name])
       }
     })
+
+    function processCancel(): void {
+      if (cancelToken) {
+        cancelToken.promise.then(reason => {
+          request.abort();
+          reject(reason);
+        });
+      }
+    }
+    
+    processCancel();
     request.send(data)
 
     // 请求返回值不是200
@@ -60,13 +71,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         // Success
         resolve(response)
       } else {
-        createError(
-          `Request failed with status code ${response.status}`,
-          config,
-          null,
-          request,
-          response
-        )
+        createError(`Request failed with status code ${response.status}`, config, null, request, response)
       }
     }
   })

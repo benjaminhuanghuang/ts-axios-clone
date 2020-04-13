@@ -1,11 +1,11 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import xhr from './xhr'
-import { buildURL } from '../helpers/url'
+import { buildURL, isAbsoluteURL, combineURL } from '../helpers/url'
 import { flattenHeaders } from '../helpers/headers'
 import transform from './transform'
 //
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
-  throwIfCancellationRequested(config);
+  throwIfCancellationRequested(config)
   processConfig(config)
   return xhr(config).then(response => transformResponseData(response))
 }
@@ -17,8 +17,11 @@ function processConfig(config: AxiosRequestConfig): void {
 }
 
 export function transformURL(config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return buildURL(url!, params)
+  let { url, params, paramsSerializer, baseURL } = config
+  if (baseURL && !isAbsoluteURL(url!)) {
+    url = combineURL(baseURL, url)
+  }
+  return buildURL(url!, params, paramsSerializer)
 }
 
 function transformResponseData(res: AxiosResponse): AxiosResponse {
@@ -28,6 +31,6 @@ function transformResponseData(res: AxiosResponse): AxiosResponse {
 
 function throwIfCancellationRequested(config: AxiosRequestConfig): void {
   if (config.cancelToken) {
-    config.cancelToken.throwIfRequested();
+    config.cancelToken.throwIfRequested()
   }
 }

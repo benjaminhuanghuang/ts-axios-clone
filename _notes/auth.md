@@ -1,0 +1,9 @@
+
+
+
+AxiosBasicCredentials
+
+auth :{
+  username:
+  password:
+}

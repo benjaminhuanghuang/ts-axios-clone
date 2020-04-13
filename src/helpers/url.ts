@@ -63,6 +63,19 @@ export function buildURL(url: string, params?: any, paramsSerializer?: (params: 
   return url
 }
 
+
+export function isAbsoluteURL(url: string): boolean {
+  // aaaa://
+  return /(^[a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+}
+
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  return relativeURL
+      // remove the last /
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+}
+
 // check host and http protocal
 export function isURLSameOrigin(requestURL: string): boolean {
   // get protocol, host of requestURL

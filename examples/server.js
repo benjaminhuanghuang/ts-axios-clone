@@ -1,6 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParse = require('cookie-parser');
+const multipart = require('connect-multipart')
+const atob = require('atob')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -28,6 +30,10 @@ app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParse())
+
+app.use(multipart({
+  uploadDir: Path2D.resolve(__dirname, 'upload_file')
+}))
 
 const router = express.Router()
 
